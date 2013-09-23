@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">XDANews</string>
+    <string name="action_settings">Settings</string>
+    
+    <string name="xda_news_url">http://feeds.feedburner.com/xda-developers/ShsH?format=xml</string>
+
+</resources>
