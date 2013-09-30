@@ -2,7 +2,7 @@ package Model;
 
 import java.util.HashMap;
 
-public interface View
+public interface UIView
 {
 	public void setVars(HashMap<String, Object> vars);
 	public void update();
