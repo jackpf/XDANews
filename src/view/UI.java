@@ -51,7 +51,10 @@ public class UI implements UIView
 		
 		Pattern imgPattern = Pattern.compile("src=\"(http://www.xda-developers.com/wp-content/uploads/.*\\.(jpg|png))\"");
 
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; true; i++) {
+        	if (feed.get("channel.item." + (i + 1) + ".title") == null)
+        		break;
+        	
 	    	HashMap<String, String> article = new HashMap<String, String>();
 	    	
 	    	article.put("title", feed.get("channel.item." + (i + 1) + ".title"));

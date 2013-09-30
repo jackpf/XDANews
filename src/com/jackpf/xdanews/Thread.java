@@ -13,6 +13,12 @@ public class Thread extends AsyncTask<String, Void, Void>
 	Exception e = null;
 	
 	@Override
+	protected void onPreExecute()
+	{
+		MainActivity.getInstance().setProgressBarIndeterminateVisibility(true);
+	}
+	
+	@Override
     protected Void doInBackground(String... params)
     {
 		if (params.length == 0) {
@@ -42,5 +48,7 @@ public class Thread extends AsyncTask<String, Void, Void>
 		} else {
 			ui.error(e);
 		}
+		
+		MainActivity.getInstance().setProgressBarIndeterminateVisibility(false);
 	}
 }
