@@ -1,9 +1,15 @@
-package view;
+package com.jackpf.xdanews;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import org.ocpsoft.prettytime.PrettyTime;
 
 import Lib.Lib;
 import Lib.Request;
@@ -22,7 +28,6 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.jackpf.xdanews.MainActivity;
 import com.jackpf.xdanews.R;
 import com.squareup.picasso.Picasso;
 
@@ -57,9 +62,25 @@ public class UI implements UIView
         	
 	    	HashMap<String, String> article = new HashMap<String, String>();
 	    	
-	    	article.put("title", feed.get("channel.item." + (i + 1) + ".title"));
-	    	article.put("date", feed.get("channel.item." + (i + 1) + ".pubDate"));
+	    	String title = feed.get("channel.item." + (i + 1) + ".title");
+	    	
+	    	if (title.length() > 50) {
+	    		title = title.substring(0, 50) + "...";
+	    	}
+	    	
+	    	article.put("title", title);
+	    	
 	    	article.put("url", feed.get("channel.item." + (i + 1) + ".guid"));
+	    	
+	    	// Parse date here to keep it out of getView()
+	    	String pubDate = feed.get("channel.item." + (i + 1) + ".pubDate");
+	    	try {
+		    	Date date = new SimpleDateFormat(context.getString(R.string.date_format), Locale.ENGLISH).parse(pubDate);
+		    	
+		    	article.put("date", new PrettyTime().format(date));
+	    	} catch (ParseException e) {
+	    		
+	    	}
 	    	
 	    	Matcher m = imgPattern.matcher(feed.get("channel.item." + (i + 1) + ".description"));
 	        String img;
@@ -67,7 +88,7 @@ public class UI implements UIView
 	    	if (m.find()) {
 	        	img = m.group(1);
 	        } else {
-	        	img = "blah";
+	        	img = "";
 	        }
 	    	
 	    	article.put("image", img);
@@ -77,6 +98,14 @@ public class UI implements UIView
 	    
 	    final ArrayAdapter adapter = new ArrayAdapter(context, articles);
 	    ListView articlesList = (ListView) context.findViewById(R.id.articles);
+	    
+	    // Ads
+	    if (articlesList.getFooterViewsCount() == 0) {
+		    articlesList.addFooterView(
+		    	((LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE))
+		    	.inflate(R.layout.ads, null)
+		    );
+	    }
 	    
 	    articlesList.setAdapter(adapter);
 	    articlesList.setOnItemClickListener(
@@ -150,9 +179,8 @@ public class UI implements UIView
 	    	TextView title = (TextView) row.findViewById(R.id.title);
 	    	title.setText(objects.get(position).get("title"));
 	    	
-	    	TextView description = (TextView) row.findViewById(R.id.description);
-	    	description.setText(objects.get(position).get("date"));
-	    	System.err.println(objects.get(position).get("date"));
+	    	TextView date = (TextView) row.findViewById(R.id.date);
+	    	date.setText(objects.get(position).get("date"));
 
     	    ImageView img = (ImageView) row.findViewById(R.id.image);
     	    Picasso.with(context).load(objects.get(position).get("image")).into(img);

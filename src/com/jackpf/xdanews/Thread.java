@@ -2,7 +2,6 @@ package com.jackpf.xdanews;
 
 import java.util.HashMap;
 
-import view.UI;
 import Lib.Request;
 import Lib.XmlParser;
 import android.os.AsyncTask;
@@ -15,7 +14,8 @@ public class Thread extends AsyncTask<String, Void, Void>
 	@Override
 	protected void onPreExecute()
 	{
-		MainActivity.getInstance().setProgressBarIndeterminateVisibility(true);
+		//MainActivity.getInstance().setProgressBarIndeterminateVisibility(true);
+		MainActivity.getInstance().refreshAttacher.setRefreshing(true);
 	}
 	
 	@Override
@@ -49,6 +49,7 @@ public class Thread extends AsyncTask<String, Void, Void>
 			ui.error(e);
 		}
 		
-		MainActivity.getInstance().setProgressBarIndeterminateVisibility(false);
+		//MainActivity.getInstance().setProgressBarIndeterminateVisibility(false);
+		MainActivity.getInstance().refreshAttacher.setRefreshComplete();
 	}
 }

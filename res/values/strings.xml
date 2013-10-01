@@ -5,5 +5,7 @@
     <string name="action_settings">Settings</string>
     
     <string name="xda_news_url">http://www.xda-developers.com/feed/</string>
+    <string name="date_format">EEE, dd MMM yyyy HH:mm:ss Z</string>
+    <string name="data_file">articles.dat</string>
 
 </resources>
