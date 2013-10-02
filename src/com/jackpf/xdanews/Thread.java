@@ -1,21 +1,44 @@
 package com.jackpf.xdanews;
 
+import java.util.Date;
 import java.util.HashMap;
 
 import Lib.Request;
 import Lib.XmlParser;
+import Model.UIView;
+import android.content.Context;
+import android.content.SharedPreferences.Editor;
 import android.os.AsyncTask;
+import android.preference.PreferenceManager;
 
 public class Thread extends AsyncTask<String, Void, Void>
 {
 	HashMap<String, Object> vars = new HashMap<String, Object>();
 	Exception e = null;
+	UIView ui;
+	Context context;
+	
+	public Thread()
+	{
+		this.context = MainActivity.getInstance();
+		this.ui = new UI();
+	}
+	
+	public Thread(Context context, UIView ui)
+	{
+		this.context = context;
+		this.ui = ui;
+	}
 	
 	@Override
 	protected void onPreExecute()
 	{
 		//MainActivity.getInstance().setProgressBarIndeterminateVisibility(true);
-		MainActivity.getInstance().refreshAttacher.setRefreshing(true);
+		try {
+			/*context*/ MainActivity.getInstance().refreshAttacher.setRefreshing(true);
+		} catch (NullPointerException e) {
+			
+		}
 	}
 	
 	@Override
@@ -28,6 +51,11 @@ public class Thread extends AsyncTask<String, Void, Void>
 		try {
 			Request request = new Request(params[0]).request().parse(new XmlParser());
 			
+			// Save request time
+			Editor prefsEditor = PreferenceManager.getDefaultSharedPreferences(context).edit();
+			prefsEditor.putLong("update_time", new Date().getTime());              
+			prefsEditor.commit();
+			
 			vars.put("feed", request);
 		} catch (Exception e) {
 			this.e = e;
@@ -39,8 +67,6 @@ public class Thread extends AsyncTask<String, Void, Void>
 	@Override
     protected void onPostExecute(Void _void)
 	{
-		UI ui = new UI();
-		
 		ui.setVars(vars);
 		
 		if (e == null) {
@@ -50,6 +76,10 @@ public class Thread extends AsyncTask<String, Void, Void>
 		}
 		
 		//MainActivity.getInstance().setProgressBarIndeterminateVisibility(false);
-		MainActivity.getInstance().refreshAttacher.setRefreshComplete();
+		try {
+			/*context*/ MainActivity.getInstance().refreshAttacher.setRefreshComplete();
+		} catch (NullPointerException e) {
+			
+		}
 	}
 }
