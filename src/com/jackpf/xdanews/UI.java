@@ -18,6 +18,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,7 +29,6 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.jackpf.xdanews.R;
 import com.squareup.picasso.Picasso;
 
 public class UI implements UIView
@@ -54,7 +54,8 @@ public class UI implements UIView
 		
 		final ArrayList<HashMap<String, String>> articles = new ArrayList<HashMap<String, String>>();
 		
-		Pattern imgPattern = Pattern.compile("src=\"(http://www.xda-developers.com/wp-content/uploads/.*\\.(jpg|png))\"");
+		Pattern imgPattern = Pattern.compile("src=\"(http://www.xda-developers.com/wp-content/uploads/.*\\.(jpg|jpeg|gif|png))\""),
+				articlePattern = Pattern.compile("<p>(.*?)</p>");
 
         for (int i = 0; true; i++) {
         	if (feed.get("channel.item." + (i + 1) + ".title") == null)
@@ -62,15 +63,28 @@ public class UI implements UIView
         	
 	    	HashMap<String, String> article = new HashMap<String, String>();
 	    	
-	    	String title = feed.get("channel.item." + (i + 1) + ".title");
+	    	String title = feed.get("channel.item." + (i + 1) + ".title"),
+	    		   description = feed.get("channel.item." + (i + 1) + ".description");
 	    	
 	    	if (title.length() > 50) {
 	    		title = title.substring(0, 50) + "...";
 	    	}
-	    	
+
 	    	article.put("title", title);
-	    	
 	    	article.put("url", feed.get("channel.item." + (i + 1) + ".guid"));
+	    	
+	    	// Parse description
+	    	Matcher articleMatcher = articlePattern.matcher(description);
+	        String art;
+	        
+	    	if (articleMatcher.find()) {
+	    		art = articleMatcher.group(1);
+	        } else {
+	        	art = null;
+	        }
+
+	    	article.put("article", Html.fromHtml(art).toString().substring(0, 50) + "...");
+	    	//article.put("articleFull", feed.get("channel.item." + (i + 1) + ".content:encoded"));
 	    	
 	    	// Parse date here to keep it out of getView()
 	    	String pubDate = feed.get("channel.item." + (i + 1) + ".pubDate");
@@ -82,13 +96,13 @@ public class UI implements UIView
 	    		
 	    	}
 	    	
-	    	Matcher m = imgPattern.matcher(feed.get("channel.item." + (i + 1) + ".description"));
+	    	Matcher imgMatcher = imgPattern.matcher(description);
 	        String img;
 	        
-	    	if (m.find()) {
-	        	img = m.group(1);
+	    	if (imgMatcher.find()) {
+	        	img = imgMatcher.group(1);
 	        } else {
-	        	img = "";
+	        	img = null;
 	        }
 	    	
 	    	article.put("image", img);
@@ -115,6 +129,7 @@ public class UI implements UIView
 				{
 					String url = ((HashMap<String, String>) adapter.getItem(position)).get("url");
 					
+					//Intent i = new Intent(context, ViewActivity.class);
 					Intent i = new Intent();
 					i.setAction(Intent.ACTION_VIEW);
 					i.setData(Uri.parse(url));
@@ -178,12 +193,17 @@ public class UI implements UIView
 
 	    	TextView title = (TextView) row.findViewById(R.id.title);
 	    	title.setText(objects.get(position).get("title"));
+
+	    	TextView article = (TextView) row.findViewById(R.id.article);
+	    	article.setText(objects.get(position).get("article"));
 	    	
 	    	TextView date = (TextView) row.findViewById(R.id.date);
 	    	date.setText(objects.get(position).get("date"));
 
-    	    ImageView img = (ImageView) row.findViewById(R.id.image);
-    	    Picasso.with(context).load(objects.get(position).get("image")).into(img);
+	    	if (objects.get(position).get("image") != null) {
+	    	    ImageView img = (ImageView) row.findViewById(R.id.image);
+	    	    Picasso.with(context).load(objects.get(position).get("image")).into(img);
+	    	}
 
     	    return row;
 	    }

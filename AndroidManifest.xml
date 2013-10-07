@@ -27,13 +27,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="com.jackpf.xdanews.ViewActivity" />
         <activity android:name="com.google.ads.AdActivity" 
                android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" />
-        <receiver android:name=".MainActivity$AlarmReceiver" android:exported="false">
+        <receiver android:name="com.jackpf.xdanews.AlarmReceiver" android:exported="false">
             <intent-filter>
                 <action android:name="com.jackpf.xdanews.ALARM_INTENT" />  
 			</intent-filter>
         </receiver>
+        <receiver android:name="com.jackpf.xdanews.BootReceiver">
+		    <intent-filter>
+		        <action android:name="android.intent.action.BOOT_COMPLETED"/>
+		    </intent-filter>
+		</receiver>
     </application>
 
 </manifest>

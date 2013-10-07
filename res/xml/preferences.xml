@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <ListPreference
+        android:key="pref_refresh_interval"
+        android:title="@string/pref_refresh_interval"
+        android:dialogTitle="@string/pref_refresh_interval"
+        android:entries="@array/pref_refresh_interval_entries"
+        android:entryValues="@array/pref_refresh_interval_values"
+        android:defaultValue="@string/pref_refresh_interval_default" />
+    <ListPreference
+        android:key="pref_refresh_delay"
+        android:title="@string/pref_refresh_delay"
+        android:dialogTitle="@string/pref_refresh_delay"
+        android:entries="@array/pref_refresh_delay_entries"
+        android:entryValues="@array/pref_refresh_delay_values"
+        android:defaultValue="@string/pref_refresh_delay_default" />
+</PreferenceScreen>

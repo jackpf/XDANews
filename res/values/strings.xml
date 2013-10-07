@@ -6,6 +6,43 @@
     
     <string name="xda_news_url">http://www.xda-developers.com/feed/</string>
     <string name="date_format">EEE, dd MMM yyyy HH:mm:ss Z</string>
-    <string name="data_file">articles.dat</string>
+    
+    <string name="notification_title">New Articles</string>
+    <plurals name="notification_text">
+        <item quantity="zero">There are no new articles for you to read!</item>
+        <item quantity="one">There is %d new article for you to read!</item>
+        <item quantity="other">There are %d new articles for you to read!</item>
+    </plurals>
+    
+    <string name="pref_refresh_interval_default">3600000</string>
+    <string name="pref_refresh_delay_default">30000</string>
+    <string name="pref_refresh_interval">Refresh Interval</string>
+    <string name="pref_refresh_delay">Refresh Delay</string>
+    <string-array name="pref_refresh_interval_entries">
+        <item>5 Seconds</item>
+        <item>1 Hour</item>
+        <item>6 Hours</item>
+        <item>12 Hours</item>
+        <item>Never</item>
+    </string-array>
+    <string-array name="pref_refresh_interval_values">
+        <item>5000</item>
+        <item>3600000</item>
+        <item>21600000</item>
+        <item>43200000</item>
+        <item>-1</item>
+    </string-array>
+    <string-array name="pref_refresh_delay_entries">
+        <item>10 Seconds</item>
+        <item>30 Seconds</item>
+        <item>1 Minute</item>
+        <item>None</item>
+    </string-array>
+    <string-array name="pref_refresh_delay_values">
+        <item>10000</item>
+        <item>30000</item>
+        <item>60000</item>
+        <item>0</item>
+    </string-array>
 
 </resources>
