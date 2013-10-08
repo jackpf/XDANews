@@ -68,7 +68,7 @@ public class AlarmReceiver extends BroadcastReceiver
 			    	}
 				}
 				
-				if (true||newArticles > 0) {
+				if (newArticles > 0) {
 					NotificationManager mNotificationManager = (NotificationManager) c.getSystemService(Context.NOTIFICATION_SERVICE);
 					Notification notification = new Notification(R.drawable.ic_launcher, c.getString(R.string.notification_title), System.currentTimeMillis());
 		            PendingIntent contentIntent = PendingIntent.getActivity(c, 0, new Intent(c, MainActivity.class), 0);

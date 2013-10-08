@@ -54,8 +54,8 @@ public class UI implements UIView
 		
 		final ArrayList<HashMap<String, String>> articles = new ArrayList<HashMap<String, String>>();
 		
-		Pattern imgPattern = Pattern.compile("src=\"(http://www.xda-developers.com/wp-content/uploads/.*\\.(jpg|jpeg|gif|png))\""),
-				articlePattern = Pattern.compile("<p>(.*?)</p>");
+		Pattern imgPattern = Pattern.compile("src=\"(http://www.xda-developers.com/wp-content/uploads/.*?\\.(jpg|jpeg|gif|png))\""),
+				articlePattern = Pattern.compile("<p.*?>(.*?)</p>");
 
         for (int i = 0; true; i++) {
         	if (feed.get("channel.item." + (i + 1) + ".title") == null)
@@ -82,8 +82,19 @@ public class UI implements UIView
 	        } else {
 	        	art = null;
 	        }
+	    	
+	    	String artText;
+	    	try {
+	    		artText = Html.fromHtml(art).toString().replace('\n', (char) 32)
+	    		    .replace((char) 160, (char) 32).replace((char) 65532, (char) 32).trim();
+	    	} catch (Exception e) {
+	    		artText = "";
+	    	}
+	    	if (artText.length() > 50) {
+	    		artText = artText.substring(0, 50) + "...";
+	    	}
 
-	    	article.put("article", Html.fromHtml(art).toString().substring(0, 50) + "...");
+	    	article.put("article", artText);
 	    	//article.put("articleFull", feed.get("channel.item." + (i + 1) + ".content:encoded"));
 	    	
 	    	// Parse date here to keep it out of getView()

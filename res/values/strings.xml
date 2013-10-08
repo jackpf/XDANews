@@ -14,6 +14,19 @@
         <item quantity="other">There are %d new articles for you to read!</item>
     </plurals>
     
+    <string-array name="drawer_list_titles">
+        <item>All</item>
+        <item>Announcements</item>
+        <item>Android</item>
+    </string-array>
+    <string-array name="drawer_list_values">
+        <item>@string/xda_news_url</item>
+        <item>http://www.xda-developers.com/category/announcements/feed/</item>
+        <item>http://www.xda-developers.com/category/android/feed/</item>
+    </string-array>
+    <string name="drawer_open">Open</string>
+    <string name="drawer_close">Close</string>
+    
     <string name="pref_refresh_interval_default">3600000</string>
     <string name="pref_refresh_delay_default">30000</string>
     <string name="pref_refresh_interval">Refresh Interval</string>

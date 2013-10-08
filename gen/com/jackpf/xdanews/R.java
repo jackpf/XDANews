@@ -9,10 +9,12 @@ package com.jackpf.xdanews;
 
 public final class R {
     public static final class array {
-        public static final int pref_refresh_delay_entries=0x7f0a0002;
-        public static final int pref_refresh_delay_values=0x7f0a0003;
-        public static final int pref_refresh_interval_entries=0x7f0a0000;
-        public static final int pref_refresh_interval_values=0x7f0a0001;
+        public static final int drawer_list_titles=0x7f0a0000;
+        public static final int drawer_list_values=0x7f0a0001;
+        public static final int pref_refresh_delay_entries=0x7f0a0004;
+        public static final int pref_refresh_delay_values=0x7f0a0005;
+        public static final int pref_refresh_interval_entries=0x7f0a0002;
+        public static final int pref_refresh_interval_values=0x7f0a0003;
     }
     public static final class attr {
         /**  A drawable to use as the background of the Header View 
@@ -75,38 +77,42 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
     public static final class drawable {
         public static final int arraylist_selector=0x7f020000;
         public static final int ic_launcher=0x7f020001;
-        public static final int list_item=0x7f020002;
-        public static final int list_item_selected=0x7f020003;
-        public static final int ptr_progress_horizontal_holo_center=0x7f020004;
-        public static final int ptr_progress_indeterminate_horizontal_holo=0x7f020005;
-        public static final int ptr_progress_primary_holo=0x7f020006;
-        public static final int ptr_progressbar_indeterminate_holo1=0x7f020007;
-        public static final int ptr_progressbar_indeterminate_holo2=0x7f020008;
-        public static final int ptr_progressbar_indeterminate_holo3=0x7f020009;
-        public static final int ptr_progressbar_indeterminate_holo4=0x7f02000a;
-        public static final int ptr_progressbar_indeterminate_holo5=0x7f02000b;
-        public static final int ptr_progressbar_indeterminate_holo6=0x7f02000c;
-        public static final int ptr_progressbar_indeterminate_holo7=0x7f02000d;
-        public static final int ptr_progressbar_indeterminate_holo8=0x7f02000e;
+        public static final int ic_launcher_2=0x7f020002;
+        public static final int list_item=0x7f020003;
+        public static final int list_item_selected=0x7f020004;
+        public static final int ptr_progress_horizontal_holo_center=0x7f020005;
+        public static final int ptr_progress_indeterminate_horizontal_holo=0x7f020006;
+        public static final int ptr_progress_primary_holo=0x7f020007;
+        public static final int ptr_progressbar_indeterminate_holo1=0x7f020008;
+        public static final int ptr_progressbar_indeterminate_holo2=0x7f020009;
+        public static final int ptr_progressbar_indeterminate_holo3=0x7f02000a;
+        public static final int ptr_progressbar_indeterminate_holo4=0x7f02000b;
+        public static final int ptr_progressbar_indeterminate_holo5=0x7f02000c;
+        public static final int ptr_progressbar_indeterminate_holo6=0x7f02000d;
+        public static final int ptr_progressbar_indeterminate_holo7=0x7f02000e;
+        public static final int ptr_progressbar_indeterminate_holo8=0x7f02000f;
     }
     public static final class id {
-        public static final int action_settings=0x7f050009;
+        public static final int action_settings=0x7f05000b;
         public static final int article=0x7f050005;
-        public static final int articles=0x7f050007;
+        public static final int articles=0x7f050008;
         public static final int date=0x7f050006;
+        public static final int drawer_layout=0x7f050007;
         public static final int image=0x7f050003;
+        public static final int left_drawer=0x7f050009;
         public static final int ptr_content=0x7f050000;
         public static final int ptr_progress=0x7f050002;
         public static final int ptr_text=0x7f050001;
         public static final int title=0x7f050004;
-        public static final int webview=0x7f050008;
+        public static final int webview=0x7f05000a;
     }
     public static final class layout {
-        public static final int _list_article=0x7f030000;
-        public static final int activity_main=0x7f030001;
-        public static final int activity_view=0x7f030002;
-        public static final int ads=0x7f030003;
-        public static final int default_header=0x7f030004;
+        public static final int _drawer_list_item=0x7f030000;
+        public static final int _list_article=0x7f030001;
+        public static final int activity_main=0x7f030002;
+        public static final int activity_view=0x7f030003;
+        public static final int ads=0x7f030004;
+        public static final int default_header=0x7f030005;
     }
     public static final class menu {
         public static final int main=0x7f0b0000;
@@ -118,11 +124,13 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int action_settings=0x7f060004;
         public static final int app_name=0x7f060003;
         public static final int date_format=0x7f060006;
+        public static final int drawer_close=0x7f060009;
+        public static final int drawer_open=0x7f060008;
         public static final int notification_title=0x7f060007;
-        public static final int pref_refresh_delay=0x7f06000b;
-        public static final int pref_refresh_delay_default=0x7f060009;
-        public static final int pref_refresh_interval=0x7f06000a;
-        public static final int pref_refresh_interval_default=0x7f060008;
+        public static final int pref_refresh_delay=0x7f06000d;
+        public static final int pref_refresh_delay_default=0x7f06000b;
+        public static final int pref_refresh_interval=0x7f06000c;
+        public static final int pref_refresh_interval_default=0x7f06000a;
         public static final int pull_to_refresh_pull_label=0x7f060000;
         public static final int pull_to_refresh_refreshing_label=0x7f060002;
         public static final int pull_to_refresh_release_label=0x7f060001;
