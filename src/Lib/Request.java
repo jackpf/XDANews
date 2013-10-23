@@ -32,7 +32,7 @@ public class Request
     /**
      * Response
      */
-    private InputStream response;
+    private HttpResponse response;
 
     /**
      * Construct
@@ -58,15 +58,13 @@ public class Request
 
         HttpGet request = new HttpGet(url);
 
-        HttpResponse response = client.execute(request);
+        response = client.execute(request);
 
         int responseCode = response.getStatusLine().getStatusCode();
 
         if (responseCode != 200) {
             throw new IOException(String.format("Server returned status code: %d", responseCode));
         }
-        
-        this.response = response.getEntity().getContent();
         
         return this;
     }
@@ -78,10 +76,20 @@ public class Request
     {
     	this.parser = parser;
     	
-    	parser.setContent(response);
+    	parser.setContent(response.getEntity().getContent());
         parser.parse();
         
         return this;
+    }
+    
+    /**
+     * Get response
+     * 
+     * @return HttpResponse
+     */
+    public HttpResponse getResponse()
+    {
+    	return response;
     }
     
     /**
